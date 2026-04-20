@@ -1,14 +1,17 @@
 id: sync
 name: sync
 cli:
+  forked_from:
+    event-based-workflow: cli:bda2f3e49e0d
   version: 2
 collections: []
 credentials: []
 openfn:
   uuid: 43c34b65-50cf-4ec3-b480-32b3b17ac9c0
   endpoint: https://2daf-154-160-0-161.ngrok-free.app
+  alias: main
   inserted_at: 2026-04-13T01:00:00Z
-  updated_at: 2026-04-13T04:37:54Z
+  updated_at: 2026-04-20T11:16:05Z
 options:
   allow_support_access: false
   requires_mfa: false
@@ -33,7 +36,7 @@ workflows:
           fn(state => {
             console.log("Do some data transformation here");
           })
-          console.log("something")
+          console.log("i changed this on github")
         adaptor: "@openfn/language-common@latest"
         openfn:
           uuid: 863ea502-8931-4001-88cf-53e2ce7f1918
@@ -60,10 +63,11 @@ workflows:
       - app:14763c11ad99
       - cli:55d566d72423
       - app:c5d531b10dcb
+      - cli:bda2f3e49e0d
     openfn:
       uuid: 90a27fd0-bcbd-4d1c-94c8-5f0f6035bbfc
       inserted_at: 2026-04-13T01:00:08Z
-      updated_at: 2026-04-17T05:57:00Z
-      lock_version: 4
+      updated_at: 2026-04-20T11:16:05Z
+      lock_version: 5
     id: event-based-workflow
     start: webhook
