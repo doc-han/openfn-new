@@ -1,0 +1,69 @@
+id: sync
+name: sync
+cli:
+  version: 2
+collections: []
+credentials: []
+openfn:
+  uuid: 43c34b65-50cf-4ec3-b480-32b3b17ac9c0
+  endpoint: https://2daf-154-160-0-161.ngrok-free.app
+  inserted_at: 2026-04-13T01:00:00Z
+  updated_at: 2026-04-13T04:37:54Z
+options:
+  allow_support_access: false
+  requires_mfa: false
+  retention_policy: retain_all
+workflows:
+  - name: Event-based workflow
+    steps:
+      - id: arcgis
+        name: Arcgis
+        expression: |-
+          // Check out the Job Writing Guide for help getting started:
+          // https://docs.openfn.org/documentation/jobs/job-writing-guide
+
+          // some changes here
+        adaptor: "@openfn/language-arcgis@1.0.7"
+        openfn:
+          uuid: ab457761-5d28-4541-816a-dd6436a28a71
+      - id: transform-data
+        name: Transform data
+        expression: |
+          // Validate and transform the data you've received...
+          fn(state => {
+            console.log("Do some data transformation here");
+          })
+          console.log("something")
+        adaptor: "@openfn/language-common@latest"
+        openfn:
+          uuid: 863ea502-8931-4001-88cf-53e2ce7f1918
+        next:
+          arcgis:
+            disabled: false
+            condition: on_job_success
+            openfn:
+              uuid: 3a68dc7d-4421-49b6-816c-711520850f40
+      - id: webhook
+        type: webhook
+        enabled: true
+        openfn:
+          uuid: 91be3f65-0eed-4b6d-89b3-60a813c71b44
+          webhook_reply: before_start
+        next:
+          transform-data:
+            disabled: false
+            condition: always
+            openfn:
+              uuid: 7eb25a8f-7dab-459d-8c1a-02762cac2cdb
+    history:
+      - app:c215a565d303
+      - app:14763c11ad99
+      - cli:55d566d72423
+      - app:c5d531b10dcb
+    openfn:
+      uuid: 90a27fd0-bcbd-4d1c-94c8-5f0f6035bbfc
+      inserted_at: 2026-04-13T01:00:08Z
+      updated_at: 2026-04-17T05:57:00Z
+      lock_version: 4
+    id: event-based-workflow
+    start: webhook

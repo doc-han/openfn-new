@@ -1,11 +1,12 @@
 project:
   uuid: 43c34b65-50cf-4ec3-b480-32b3b17ac9c0
   endpoint: https://2daf-154-160-0-161.ngrok-free.app
-  alias: 
   inserted_at: 2026-04-13T01:00:00Z
   updated_at: 2026-04-13T04:37:54Z
   id: sync
   name: sync
+  forked_from:
+    event-based-workflow: app:c5d531b10dcb
 workspace:
   credentials: credentials.yaml
   dirs:

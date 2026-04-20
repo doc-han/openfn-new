@@ -1,0 +1,24 @@
+id: event-based-workflow
+name: Event-based workflow
+start: webhook
+options: {}
+steps:
+  - id: arcgis
+    name: Arcgis
+    adaptor: "@openfn/language-arcgis@1.0.7"
+    expression: ./arcgis.js
+  - id: transform-data
+    name: Transform data
+    adaptor: "@openfn/language-common@latest"
+    expression: ./transform-data.js
+    next:
+      arcgis:
+        disabled: false
+        condition: on_job_success
+  - id: webhook
+    type: webhook
+    enabled: true
+    next:
+      transform-data:
+        disabled: false
+        condition: always
